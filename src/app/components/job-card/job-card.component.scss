@@ -1,0 +1,37 @@
+.job-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px); // Se eleva un poco
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer;
+  }
+}
+
+.bg-soft-primary {
+  background-color: rgba(13, 110, 253, 0.1); 
+}
+
+.btn-action {
+  transition: all 0.2s;
+  
+  &:hover {
+    filter: brightness(90%);
+    transform: scale(1.02);
+  }
+}
+
+i {
+  font-size: 1.1rem;
+}
+
+/* Separación para que el filtro no quede pegado al borde superior al hacer scroll */
+.sticky-top {
+  top: 5rem; 
+  z-index: 100;
+}
+
+/* Opcional: Para que las tarjetas tengan un radio de borde más parecido a Figma */
+.card {
+  border-radius: 1rem;
+}

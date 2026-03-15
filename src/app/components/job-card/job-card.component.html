@@ -1,0 +1,28 @@
+<div class="card h-100 border-0 job-card shadow-sm">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-start mb-3">
+      <span class="badge bg-soft-primary text-primary px-3 py-2 rounded-pill">
+        Full-time
+      </span>
+      <button class="btn btn-link p-0 text-muted"><i class="bi bi-bookmark"></i></button>
+    </div>
+
+    <h5 class="card-title fw-bold text-dark mb-1">{{ jobData.title }}</h5>
+    <p class="text-primary fw-medium mb-3">{{ jobData.company }}</p>
+    
+    <div class="job-info mb-4">
+      <div class="d-flex align-items-center text-muted small mb-2">
+        <i class="bi bi-geo-alt me-2"></i>
+        <span>{{ jobData.location }}</span>
+      </div>
+      <div class="d-flex align-items-center text-muted small">
+        <i class="bi bi-clock me-2"></i>
+        <span>Publicado hace 2 días</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2 fw-bold rounded-3 btn-action">
+      Ver detalles
+    </button>
+  </div>
+</div>

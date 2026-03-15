@@ -1,0 +1,20 @@
+.hero-section {
+  /* Usamos un degradado para que no sea un azul plano aburrido */
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-box {
+  max-width: 700px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+
+  &:focus-within {
+    transform: translateY(-2px);
+  }
+
+  input {
+    font-size: 1.1rem;
+    height: 50px;
+  }
+}
