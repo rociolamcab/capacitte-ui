@@ -25,13 +25,24 @@ i {
   font-size: 1.1rem;
 }
 
-/* Separación para que el filtro no quede pegado al borde superior al hacer scroll */
 .sticky-top {
   top: 5rem; 
   z-index: 100;
 }
 
-/* Opcional: Para que las tarjetas tengan un radio de borde más parecido a Figma */
 .card {
-  border-radius: 1rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  }
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  // -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }

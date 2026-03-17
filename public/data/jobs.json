@@ -4,6 +4,8 @@
     "title": "Angular Developer",
     "company": "Capacitte Tech",
     "location": "Remoto",
+    "type": "full",
+    "salary": 25000,
     "description": "Desarrollo de interfaces modernas con Angular 19."
   },
   {
@@ -11,6 +13,8 @@
     "title": "Fullstack Engineer",
     "company": "Digital Solutions",
     "location": "Madrid, ES",
+    "type": "part",
+    "salary": 35000,
     "description": "Trabajo con Node.js y frameworks de Frontend."
   }
 ]

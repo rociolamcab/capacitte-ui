@@ -4,5 +4,7 @@ export interface Job {
   company: string;
   location: string;
   description: string;
-  salary?: string;
+  type: string;
+  salary: number;      
+  postedDate: string;  
 }

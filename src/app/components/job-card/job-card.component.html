@@ -1,28 +1,37 @@
-<div class="card h-100 border-0 job-card shadow-sm">
-  <div class="card-body p-4">
-    <div class="d-flex justify-content-between align-items-start mb-3">
-      <span class="badge bg-soft-primary text-primary px-3 py-2 rounded-pill">
-        Full-time
-      </span>
-      <button class="btn btn-link p-0 text-muted"><i class="bi bi-bookmark"></i></button>
-    </div>
-
-    <h5 class="card-title fw-bold text-dark mb-1">{{ jobData.title }}</h5>
-    <p class="text-primary fw-medium mb-3">{{ jobData.company }}</p>
+<div class="card h-100 shadow-sm border-0 rounded-4 p-2">
+  <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <h5 class="card-title fw-bold text-primary mb-0">{{ jobData.title }}</h5>
+        <span class="badge rounded-pill border" 
+        [class.bg-success-subtle]="jobData.location.toLowerCase().includes('remoto')"
+        [class.text-success]="jobData.location.toLowerCase().includes('remoto')"
+        [class.border-success]="jobData.location.toLowerCase().includes('remoto')"
+        [class.bg-primary-subtle]="!jobData.location.toLowerCase().includes('remoto')"
+        [class.text-primary]="!jobData.location.toLowerCase().includes('remoto')"
+        [class.border-primary]="!jobData.location.toLowerCase().includes('remoto')">
+        {{ jobData.location.toLowerCase().includes('remoto') ? 'Remoto' : 'Presencial' }}
+        </span>
+      </div>
+  
+    <p class="card-text small text-muted">
+      <i class="bi bi-building me-2"></i>{{ jobData.company }}
+    </p>
     
-    <div class="job-info mb-4">
-      <div class="d-flex align-items-center text-muted small mb-2">
-        <i class="bi bi-geo-alt me-2"></i>
-        <span>{{ jobData.location }}</span>
-      </div>
-      <div class="d-flex align-items-center text-muted small">
-        <i class="bi bi-clock me-2"></i>
-        <span>Publicado hace 2 días</span>
-      </div>
-    </div>
+    <p class="card-text small text-muted">
+      <i class="bi bi-geo-alt me-2"></i>{{ jobData.location }}
+    </p>
 
-    <button class="btn btn-primary w-100 py-2 fw-bold rounded-3 btn-action">
-      Ver detalles
-    </button>
+    <p class="card-text small text-muted">
+      <i class="bi bi-cash-stack me-2"></i>
+      {{ jobData.salary | currency:'EUR':'':'1.0' }} €
+    </p>
+    
+    <p class="card-text small text-muted text-truncate-2">
+      {{ jobData.description }}
+    </p>
+  </div>
+
+  <div class="card-footer bg-transparent border-0 pb-3">
+    <button class="btn btn-outline-primary w-100 fw-bold rounded-pill">Ver detalles</button>
   </div>
 </div>

@@ -15,9 +15,12 @@ describe('JobListComponent', () => {
     fixture = TestBed.createComponent(JobListComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
+    
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
+

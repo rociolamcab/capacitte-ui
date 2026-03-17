@@ -50,21 +50,27 @@ ngOnInit(): void {
 private applyFilters(): void {
   const remoteCheck = document.getElementById('remote') as HTMLInputElement;
   const presencialCheck = document.getElementById('presencial') as HTMLInputElement;
+  const jornadaSelect = document.getElementById('jornada') as HTMLSelectElement; // <-- Nuevo
 
   const isRemote = remoteCheck?.checked || false;
   const isPresencial = presencialCheck?.checked || false;
+  const jornadaFilter = jornadaSelect?.value || 'all'; // <-- Nuevo
 
   this.filteredJobs = this.jobs.filter(job => {
+
     const matchesSearch = !this.searchTerm || 
                           job.title.toLowerCase().includes(this.searchTerm) || 
                           job.company.toLowerCase().includes(this.searchTerm);
-                          
-    if (!isRemote && !isPresencial) return matchesSearch;
 
-    const jobIsRemote = job.location.toLowerCase().includes('remoto');
-    const matchesModalidad = (isRemote && jobIsRemote) || (isPresencial && !jobIsRemote);
+    let matchesModalidad = true;
+    if (isRemote || isPresencial) {
+      const jobIsRemote = job.location.toLowerCase().includes('remoto');
+      matchesModalidad = (isRemote && jobIsRemote) || (isPresencial && !jobIsRemote);
+    }
 
-    return matchesSearch && matchesModalidad;
+    const matchesJornada = jornadaFilter === 'all' || job.type === jornadaFilter;
+
+    return matchesSearch && matchesModalidad && matchesJornada;
   });
 }
 
@@ -78,4 +84,16 @@ private applyFilters(): void {
 
     this.filteredJobs = [...this.jobs];
   }
+
+  onSortChange(event: Event): void {
+  const sortBy = (event.target as HTMLSelectElement).value;
+
+  if (sortBy === 'recent') {
+    this.filteredJobs.sort((a, b) => 
+      new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
+    );
+  } else if (sortBy === 'salary') {
+    this.filteredJobs.sort((a, b) => b.salary - a.salary);
+  }
+}
 }
