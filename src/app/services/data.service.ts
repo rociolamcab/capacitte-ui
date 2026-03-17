@@ -9,7 +9,7 @@ import { Job } from '../models/job';
 
 export class DataService {
   
-  private apiUrl = 'assets/data/jobs.json'; 
+  private apiUrl = 'assets/data/jobs.json'; // Ruta al archivo JSON en assets
 
   constructor(private http: HttpClient) { }
 

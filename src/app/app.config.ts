@@ -9,6 +9,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideClientHydration(),
-    provideHttpClient(withFetch()) // <-- Añade esto para poder hacer peticiones
+    provideHttpClient(withFetch())
   ]
 };

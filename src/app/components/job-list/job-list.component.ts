@@ -18,62 +18,56 @@ export class JobListComponent implements OnInit {
   loading: boolean = true;
   errorMessage: string | null = null;
   
-  // Guardamos el término de búsqueda para combinarlo con los filtros laterales
   private searchTerm: string = '';
   
   private dataService = inject(DataService);
 
-  ngOnInit(): void {
-    this.dataService.getJobs().subscribe({
-      next: (data) => {
-        this.jobs = data;
-        this.filteredJobs = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'No se pudo conectar con la base de datos.';
-        this.loading = false;
-        console.error(err);
-      }
-    });
-  }
+ngOnInit(): void {
+  this.dataService.getJobs().subscribe({
+    next: (data) => {
+      console.log('Datos cargados:', data);
+      this.jobs = data;
+      this.filteredJobs = [...data]; 
+      this.loading = false;
+    },
+    error: (err) => {
+      this.errorMessage = 'Error al cargar los empleos. Revisa la consola.';
+      this.loading = false;
+      console.error('Error de DataService:', err);
+    }
+  });
+}
 
-  // Se ejecuta cuando el Hero emite un término
   onSearch(term: string): void {
     this.searchTerm = term.toLowerCase().trim();
     this.applyFilters();
   }
 
-  // Se ejecuta cuando cambian los checkboxes o el select del HTML
   onFilterChange(): void {
     this.applyFilters();
   }
 
-  // Método centralizado de filtrado (Lógica profesional)
-  private applyFilters(): void {
-    // 1. Capturamos el estado de los filtros directamente desde el DOM
-    const isRemote = (document.getElementById('remote') as HTMLInputElement)?.checked;
-    const isPresencial = (document.getElementById('presencial') as HTMLInputElement)?.checked;
+private applyFilters(): void {
+  const remoteCheck = document.getElementById('remote') as HTMLInputElement;
+  const presencialCheck = document.getElementById('presencial') as HTMLInputElement;
 
-    this.filteredJobs = this.jobs.filter(job => {
-      // Filtro de Texto (Buscador)
-      const matchesSearch = !this.searchTerm || 
-                            job.title.toLowerCase().includes(this.searchTerm) || 
-                            job.company.toLowerCase().includes(this.searchTerm);
+  const isRemote = remoteCheck?.checked || false;
+  const isPresencial = presencialCheck?.checked || false;
 
-      // Filtro de Modalidad (Checkbox)
-      let matchesModalidad = true;
-      if (isRemote || isPresencial) {
-        // Ejemplo: si es remoto buscamos la palabra "Remoto" en la localización
-        const jobIsRemote = job.location.toLowerCase().includes('remoto');
-        matchesModalidad = (isRemote && jobIsRemote) || (isPresencial && !jobIsRemote);
-      }
+  this.filteredJobs = this.jobs.filter(job => {
+    const matchesSearch = !this.searchTerm || 
+                          job.title.toLowerCase().includes(this.searchTerm) || 
+                          job.company.toLowerCase().includes(this.searchTerm);
+                          
+    if (!isRemote && !isPresencial) return matchesSearch;
 
-      return matchesSearch && matchesModalidad;
-    });
-  }
+    const jobIsRemote = job.location.toLowerCase().includes('remoto');
+    const matchesModalidad = (isRemote && jobIsRemote) || (isPresencial && !jobIsRemote);
 
-  // Método para el botón "Limpiar filtros"
+    return matchesSearch && matchesModalidad;
+  });
+}
+
   clearFilters(): void {
     this.searchTerm = '';
     const remoteCheck = document.getElementById('remote') as HTMLInputElement;
