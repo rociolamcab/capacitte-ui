@@ -4,17 +4,17 @@ import { Observable, of } from 'rxjs';
 import { Job } from '../models/job';
 
 @Injectable({
-  providedIn: 'root' // <- Esto es lo más importante
+  providedIn: 'root'
 })
+
 export class DataService {
-  private mockJobs: Job[] = [
-    { id: 1, title: 'Angular Developer', company: 'Capacitte', location: 'Remoto', description: 'Frontend specialist' }
-  ];
+  
+  private apiUrl = 'assets/data/jobs.json'; 
 
   constructor(private http: HttpClient) { }
 
   getJobs(): Observable<Job[]> {
-    // Por ahora usamos 'of' para evitar errores si la API no responde
-    return of(this.mockJobs);
+
+    return this.http.get<Job[]>(this.apiUrl);
   }
 }
