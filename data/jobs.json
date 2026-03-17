@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Angular Developer",
+    "company": "Capacitte Tech",
+    "location": "Remoto",
+    "description": "Desarrollo de interfaces modernas con Angular 19."
+  },
+  {
+    "id": 2,
+    "title": "Fullstack Engineer",
+    "company": "Digital Solutions",
+    "location": "Madrid, ES",
+    "description": "Trabajo con Node.js y frameworks de Frontend."
+  }
+]
